@@ -225,7 +225,10 @@ test('\nrange tests', function(t) {
     ['^1.2 ^1', '1.4.2'],
     ['^1.2.3-alpha', '1.2.3-pre'],
     ['^1.2.0-alpha', '1.2.0-pre'],
-    ['^0.0.1-alpha', '0.0.1-beta']
+    ['^0.0.1-alpha', '0.0.1-beta'],
+    ['^1.2.3', '2.0.0-alpha'],
+    ['*', 'v1.2.3-foo', true],
+    ['^1.2.3', '2.0.0-pre']
   ].forEach(function(v) {
     var range = v[0];
     var ver = v[1];
@@ -240,19 +243,17 @@ test('\nnegative range tests', function(t) {
   // version should not be included by range
   [['1.0.0 - 2.0.0', '2.2.3'],
     ['1.2.3+asdf - 2.4.3+asdf', '1.2.3-pre.2'],
-    ['1.2.3+asdf - 2.4.3+asdf', '2.4.3-alpha'],
+    ['1.2.3+asdf - 2.4.3-alpha', '2.4.3-beta'],
     ['^1.2.3+build', '2.0.0'],
     ['^1.2.3+build', '1.2.0'],
     ['^1.2.3', '1.2.3-pre'],
     ['^1.2', '1.2.0-pre'],
     ['>1.2', '1.3.0-beta'],
-    ['<=1.2.3', '1.2.3-beta'],
+    ['>=1.2.3', '1.2.3-beta'],
     ['^1.2.3', '1.2.3-beta'],
     ['=0.7.x', '0.7.0-asdf'],
     ['>=0.7.x', '0.7.0-asdf'],
     ['1', '1.0.0beta', true],
-    ['<1', '1.0.0beta', true],
-    ['< 1', '1.0.0beta', true],
     ['1.0.0', '1.0.1'],
     ['>=1.0.0', '0.0.0'],
     ['>=1.0.0', '0.0.1'],
@@ -290,22 +291,18 @@ test('\nnegative range tests', function(t) {
     ['~1.0', '1.1.0'], // >=1.0.0 <1.1.0
     ['<1', '1.0.0'],
     ['>=1.2', '1.1.1'],
-    ['1', '2.0.0beta', true],
+    ['1.0.x', '2.0.0beta', true],
     ['~v0.5.4-beta', '0.5.4-alpha'],
     ['=0.7.x', '0.8.2'],
     ['>=0.7.x', '0.6.2'],
     ['<0.7.x', '0.7.2'],
-    ['<1.2.3', '1.2.3-beta'],
     ['=1.2.3', '1.2.3-beta'],
     ['>1.2', '1.2.8'],
-    ['^1.2.3', '2.0.0-alpha'],
     ['^1.2.3', '1.2.2'],
     ['^1.2', '1.1.9'],
-    ['*', 'v1.2.3-foo', true],
     // invalid ranges never satisfied!
     ['blerg', '1.2.3'],
     ['git+https://user:password0123@github.com/foo', '123.0.0', true],
-    ['^1.2.3', '2.0.0-pre']
   ].forEach(function(v) {
     var range = v[0];
     var ver = v[1];

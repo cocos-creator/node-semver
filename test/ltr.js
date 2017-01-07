@@ -70,8 +70,7 @@ test('\nltr tests', function(t) {
     ['^1', '1.0.0-0'],
     ['>=0.7.x', '0.7.0-asdf'],
     ['1', '1.0.0beta', true],
-    ['>=0.7.x', '0.6.2'],
-    ['>1.2.3', '1.3.0-alpha']
+    ['>=0.7.x', '0.6.2']
   ].forEach(function(tuple) {
     var range = tuple[0];
     var version = tuple[1];
@@ -169,7 +168,8 @@ test('\nnegative ltr tests', function(t) {
     ['~1.0.0-alpha', '1.0.0beta', true],
     ['^1.0.0-alpha', '1.0.0-beta'],
     ['~1.0.0-alpha', '1.0.0-beta'],
-    ['=0.1.0', '1.0.0']
+    ['=0.1.0', '1.0.0'],
+    ['>1.2.3', '1.3.0-alpha']
   ].forEach(function(tuple) {
     var range = tuple[0];
     var version = tuple[1];
